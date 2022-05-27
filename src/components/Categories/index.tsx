@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as s from "./styles";
 
 const Categories = () => {
   const [activeCategory, setActiveCategory] = useState(0);
@@ -13,19 +14,19 @@ const Categories = () => {
   ];
 
   return (
-    <div className="categories">
-      <ul>
+    <s.Root className="categories">
+      <s.List>
         {categories.map((value, index) => (
-          <li
+          <s.Item
             key={index}
             onClick={() => setActiveCategory(index)}
             className={activeCategory === index ? "active" : ""}
           >
             {value}
-          </li>
+          </s.Item>
         ))}
-      </ul>
-    </div>
+      </s.List>
+    </s.Root>
   );
 };
 
