@@ -3,11 +3,18 @@ import exp from "constants";
 
 export const Root = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export const Block = styled.div`
   display: flex;
   align-items: center;
+  justify-content: right;
+
+  @media (max-width: 1300px) {
+    justify-content: left;
+    margin-top: 15px;
+  }
 `;
 
 export const svg = styled.svg`
