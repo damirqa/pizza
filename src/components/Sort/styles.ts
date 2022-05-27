@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import exp from "constants";
 
 export const Root = styled.div`
   position: relative;
@@ -23,6 +22,10 @@ export const svg = styled.svg`
 
 export const Label = styled.b`
   margin-right: 8px;
+
+  @media (max-width: 410px) {
+    display: none;
+  }
 `;
 
 export const Value = styled.span`
@@ -41,6 +44,15 @@ export const Popup = styled.div`
   overflow: hidden;
   padding: 10px 0;
   width: 160px;
+
+  @media (max-width: 1300px) {
+    right: auto;
+    left: 125px;
+  }
+
+  @media (max-width: 410px) {
+    left: auto;
+  }
 `;
 
 export const List = styled.ul`
