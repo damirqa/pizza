@@ -14,7 +14,7 @@ const Categories = () => {
   ];
 
   return (
-    <s.Root className="categories">
+    <s.Root>
       <s.List>
         {categories.map((value, index) => (
           <s.Item
