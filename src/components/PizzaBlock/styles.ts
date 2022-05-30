@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import * as base from "../../styles/base";
 
 export const Root = styled.div`
   width: 280px;
@@ -65,11 +66,6 @@ export const Price = styled.div`
   letter-spacing: 0.015em;
 `;
 
-interface IButtonProps {
-  outline: boolean;
-  add: boolean;
-}
-
 export const Counter = styled.i`
   display: inline-block;
   border-radius: 30px;
@@ -99,62 +95,29 @@ export const path = styled.path`
   transition: all 0.15s ease-in-out;
 `;
 
-export const Button = styled.button<IButtonProps>`
-  display: inline-block;
-  background-color: ${(props) => (props.outline ? "#fff" : "#fe5f1e")};
-  border-radius: 30px;
-  padding: 10px 20px;
-  min-width: 100px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  border: 1px solid transparent;
-
-  ${(props) => {
-    if (props.outline) {
-      return css`
-        background-color: #fff;
-        border-color: #fe5f1e;
+export const ButtonAdd = styled(base.Button)`
+  font-weight: 600;
+  font-size: 16px;
+  ${({ outline }) => {
+    if (outline) {
+      return `
         ${ButtonLabel} {
           color: #fe5f1e;
         }
+        
         ${path} {
           fill: #fe5f1e;
         }
+                
         &:hover {
-          background-color: #fe5f1e;
           ${ButtonLabel} {
             color: #fff;
           }
+            
           ${path} {
             fill: #fff;
           }
-          &:active {
-            background-color: darken(#fe5f1e, 8%);
-          }
-        }
-      `;
-    } else {
-      return css`
-        background-color: #fe5f1e;
-        border-color: #fff;
-      `;
-    }
-  }}
-
-  ${(props) => {
-    if (props.add) {
-      return css`
-        ${svg} {
-          margin-right: 2px;
-        }
-
-        ${ButtonLabel} {
-          font-weight: 600;
-          font-size: 16px;
-        }
-
-        &:hover {
+          
           ${Counter} {
             background-color: #fff;
             color: #fe5f1e;
@@ -163,13 +126,4 @@ export const Button = styled.button<IButtonProps>`
       `;
     }
   }}
-
-  &:hover {
-    background-color: darken(#fe5f1e, 8%);
-  }
-
-  &:active {
-    background-color: darken(#fe5f1e, 12%);
-    transform: translateY(1px);
-  }
 `;
