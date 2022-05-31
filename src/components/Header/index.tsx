@@ -46,7 +46,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </s.svg>
-            <s.Counter>3</s.Counter>
+            <s.Price>3</s.Price>
           </s.ButtonCart>
         </div>
       </s.Container>

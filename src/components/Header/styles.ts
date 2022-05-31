@@ -16,6 +16,7 @@ export const Container = styled.div`
 
 export const Logo = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const ImgLogo = styled.img`
@@ -28,10 +29,18 @@ export const Title = styled.h1`
   letter-spacing: 1%;
   text-transform: uppercase;
   font-weight: 800;
+
+  @media (max-width: 574px) {
+    font-size: 18px;
+  }
 `;
 
 export const Description = styled.p`
   color: #7b7b7b;
+
+  @media (max-width: 574px) {
+    display: none;
+  }
 `;
 
 export const ButtonCart = styled(base.Button)`
@@ -39,6 +48,10 @@ export const ButtonCart = styled(base.Button)`
   align-items: center;
   line-height: 23px;
   padding: 12px 25px;
+
+  @media (max-width: 648px) {
+    justify-content: center;
+  }
 `;
 
 export const svg = styled.svg`
@@ -50,6 +63,16 @@ export const Counter = styled.span`
   font-weight: 600;
   font-size: 16px;
   color: #fff;
+
+  @media (max-width: 648px) {
+    display: none;
+  }
+`;
+
+export const Price = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
 `;
 
 export const Delimiter = styled.div`
@@ -58,4 +81,8 @@ export const Delimiter = styled.div`
   background-color: rgba(255, 255, 255, 0.25);
   margin-left: 14px;
   margin-right: 14px;
+
+  @media (max-width: 648px) {
+    display: none;
+  }
 `;
