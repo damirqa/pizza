@@ -51,6 +51,7 @@ export const ButtonCart = styled(base.Button)`
 
   @media (max-width: 648px) {
     justify-content: center;
+    padding: 10px 20px;
   }
 `;
 
