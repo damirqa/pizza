@@ -43,7 +43,7 @@ export const Popup = styled.div`
   border-radius: 10px;
   overflow: hidden;
   padding: 10px 0;
-  width: 160px;
+  width: 285px;
 
   @media (max-width: 1300px) {
     right: auto;

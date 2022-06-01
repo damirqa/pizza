@@ -15,24 +15,45 @@ interface IPizza {
   rating: number;
 }
 
+interface ISort {
+  field: string;
+  value: string;
+  typeSort: string;
+}
+
 const Home = () => {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [category, setCategory] = useState(0);
+  const [sort, setSort] = useState<ISort>({
+    field: "rating",
+    value: "популярности (по возрастанию)",
+    typeSort: "asc",
+  });
+
   useEffect(() => {
-    fetch("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas")
+    setIsLoading(true);
+    let query = category ? "?category=" + category : "";
+    query =
+      query +
+      (category ? "&" : "?") +
+      `sortBy=${sort.field}&order=${sort.typeSort}`;
+
+    console.log(query);
+    fetch("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas" + query)
       .then((res) => res.json())
       .then((arr) => {
         setPizzas(arr);
         setIsLoading(false);
       });
-  }, []);
+  }, [category, sort]);
 
   return (
     <React.Fragment>
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories category={category} onClickCategory={setCategory} />
+        <Sort sort={sort} onChangeSort={setSort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

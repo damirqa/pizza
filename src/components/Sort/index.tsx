@@ -1,13 +1,43 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import * as s from "./styles";
 
-const Sort = () => {
-  const [isVisible, setVisible] = useState(false);
-  const [activeSort, setActiveSort] = useState(0);
-  const list: string[] = ["популярности", "цене", "алфавиту"];
+interface ISort {
+  field: string;
+  value: string;
+  typeSort: string;
+}
 
-  const changeActiveSort = (activeId: React.SetStateAction<number>) => {
-    setActiveSort(activeId);
+interface ISortProps {
+  sort: ISort;
+  onChangeSort: Dispatch<SetStateAction<ISort>>;
+}
+
+const Sort = ({ sort, onChangeSort }: ISortProps) => {
+  const [isVisible, setVisible] = useState(false);
+  const list: ISort[] = [
+    {
+      field: "rating",
+      value: "популярности (по возрастанию)",
+      typeSort: "asc",
+    },
+    { field: "rating", value: "популярности (по убыванию)", typeSort: "desc" },
+    { field: "price", value: "цене (по возрастанию)", typeSort: "asc" },
+    { field: "price", value: "цене (по убыванию)", typeSort: "desc" },
+    { field: "title", value: "алфавиту (по возрастанию)", typeSort: "asc" },
+    { field: "title", value: "алфавиту (по убыванию)", typeSort: "desc" },
+  ];
+
+  // const list: string[] = [
+  //   popular: "популярности (по возрастанию)",
+  //   "популярности (по убыванию)",
+  //   "цене (по возрастанию)",
+  //   "цене (по убыванию)",
+  //   "алфавиту (по возрастанию)",
+  //   "алфавиту (по убыванию)",
+  // ];
+
+  const changeActiveSort = (active: ISort) => {
+    onChangeSort(active);
     setVisible(false);
   };
 
@@ -28,19 +58,19 @@ const Sort = () => {
         </s.svg>
         <s.Label>Сортировка по:</s.Label>
         <s.Value onClick={() => setVisible((prevState) => !prevState)}>
-          {list[activeSort]}
+          {sort.value}
         </s.Value>
       </s.Block>
       {isVisible && (
         <s.Popup>
           <s.List>
-            {list.map((value, index) => (
+            {list.map((object, index) => (
               <s.Item
                 key={index}
-                onClick={() => changeActiveSort(index)}
-                className={index === activeSort ? "active" : ""}
+                onClick={() => changeActiveSort(object)}
+                className={object === sort ? "active" : ""}
               >
-                {value}
+                {object.value}
               </s.Item>
             ))}
           </s.List>

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import * as s from "./styles";
 
-const Categories = () => {
-  const [activeCategory, setActiveCategory] = useState(0);
+interface ICategoriesProps {
+  category: number;
+  onClickCategory: Dispatch<SetStateAction<number>>;
+}
 
+const Categories = ({ category, onClickCategory }: ICategoriesProps) => {
   const categories = [
     "Все",
     "Мясные",
@@ -19,8 +22,8 @@ const Categories = () => {
         {categories.map((value, index) => (
           <s.Item
             key={index}
-            onClick={() => setActiveCategory(index)}
-            className={activeCategory === index ? "active" : ""}
+            onClick={() => onClickCategory(index)}
+            className={category === index ? "active" : ""}
           >
             {value}
           </s.Item>
