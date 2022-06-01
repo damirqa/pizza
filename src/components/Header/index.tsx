@@ -1,6 +1,7 @@
 import React from "react";
 import * as s from "./styles";
 import logo from "../../assets/img/pizza-logo.svg";
+import Search from "../Search";
 
 const Header = () => {
   return (
@@ -14,6 +15,7 @@ const Header = () => {
           </div>
         </s.Logo>
         <div className={"header__cart"}>
+          <Search />
           <s.ButtonCart as="a">
             <s.Counter>521 ₽</s.Counter>
             <s.Delimiter />

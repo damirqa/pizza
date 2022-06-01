@@ -30,15 +30,19 @@ export const Title = styled.h1`
   text-transform: uppercase;
   font-weight: 800;
 
-  @media (max-width: 574px) {
+  @media (max-width: 900px) {
     font-size: 18px;
+  }
+
+  @media (max-width: 730px) {
+    display: none;
   }
 `;
 
 export const Description = styled.p`
   color: #7b7b7b;
 
-  @media (max-width: 574px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
@@ -49,9 +53,9 @@ export const ButtonCart = styled(base.Button)`
   line-height: 23px;
   padding: 12px 25px;
 
-  @media (max-width: 648px) {
+  @media (max-width: 900px) {
     justify-content: center;
-    padding: 10px 20px;
+    padding: 8px 20px;
   }
 `;
 

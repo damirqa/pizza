@@ -28,7 +28,7 @@ const Home = () => {
   const [category, setCategory] = useState(0);
   const [sort, setSort] = useState<ISort>({
     field: "rating",
-    value: "популярности (по возрастанию)",
+    value: "популярности (ASC)",
     typeSort: "asc",
   });
 
