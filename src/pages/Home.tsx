@@ -34,14 +34,12 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    let query = category ? "?category=" + category : "";
-    query =
-      query +
-      (category ? "&" : "?") +
-      `sortBy=${sort.field}&order=${sort.typeSort}`;
 
-    console.log(query);
-    fetch("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas" + query)
+    let categoryQuery = category ? `category=${category}` : "";
+    let sortByQuery = sort ? `sortBy=${sort.field}&order=${sort.typeSort}` : "";
+    let query = `${categoryQuery}&${sortByQuery}`;
+
+    fetch("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + query)
       .then((res) => res.json())
       .then((arr) => {
         setPizzas(arr);
