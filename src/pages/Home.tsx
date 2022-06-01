@@ -3,6 +3,7 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaBlockSkeleton from "../components/skeletons/PizzaBlockSkeleton";
+import { SearchContext } from "../App";
 
 interface IPizza {
   id: number;
@@ -22,6 +23,8 @@ interface ISort {
 }
 
 const Home = () => {
+  const { search } = React.useContext(SearchContext);
+
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,7 +40,8 @@ const Home = () => {
 
     let categoryQuery = category ? `category=${category}` : "";
     let sortByQuery = sort ? `sortBy=${sort.field}&order=${sort.typeSort}` : "";
-    let query = `${categoryQuery}&${sortByQuery}`;
+    let searchQuery = search ? `search=${search}` : "";
+    let query = `${categoryQuery}&${sortByQuery}&${searchQuery}`;
 
     fetch("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + query)
       .then((res) => res.json())
@@ -45,7 +49,7 @@ const Home = () => {
         setPizzas(arr);
         setIsLoading(false);
       });
-  }, [category, sort]);
+  }, [category, sort, search]);
 
   return (
     <React.Fragment>

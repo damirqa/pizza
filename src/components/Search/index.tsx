@@ -1,7 +1,9 @@
 import React from "react";
 import * as s from "./styles";
+import { SearchContext } from "../../App";
 
 const Search = () => {
+  const { search, setSearch } = React.useContext(SearchContext);
   return (
     <s.Root>
       <s.svg
@@ -15,7 +17,11 @@ const Search = () => {
           id="XMLID_223_"
         />
       </s.svg>
-      <s.Input placeholder={"Search..."} />
+      <s.Input
+        placeholder={"Search..."}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
     </s.Root>
   );
 };
