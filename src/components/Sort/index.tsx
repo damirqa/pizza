@@ -17,24 +17,15 @@ const Sort = ({ sort, onChangeSort }: ISortProps) => {
   const list: ISort[] = [
     {
       field: "rating",
-      value: "популярности (по возрастанию)",
+      value: "популярности (ASC)",
       typeSort: "asc",
     },
-    { field: "rating", value: "популярности (по убыванию)", typeSort: "desc" },
-    { field: "price", value: "цене (по возрастанию)", typeSort: "asc" },
-    { field: "price", value: "цене (по убыванию)", typeSort: "desc" },
-    { field: "title", value: "алфавиту (по возрастанию)", typeSort: "asc" },
-    { field: "title", value: "алфавиту (по убыванию)", typeSort: "desc" },
+    { field: "rating", value: "популярности (DESC)", typeSort: "desc" },
+    { field: "price", value: "цене (ASC)", typeSort: "asc" },
+    { field: "price", value: "цене (DESC)", typeSort: "desc" },
+    { field: "title", value: "алфавиту (ASC)", typeSort: "asc" },
+    { field: "title", value: "алфавиту (DESC)", typeSort: "desc" },
   ];
-
-  // const list: string[] = [
-  //   popular: "популярности (по возрастанию)",
-  //   "популярности (по убыванию)",
-  //   "цене (по возрастанию)",
-  //   "цене (по убыванию)",
-  //   "алфавиту (по возрастанию)",
-  //   "алфавиту (по убыванию)",
-  // ];
 
   const changeActiveSort = (active: ISort) => {
     onChangeSort(active);
