@@ -1,34 +1,29 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
+import { useReduxDispatch, useReduxSelector } from "../../hooks/hooks";
+import { ISort, setSort } from "../../redux/slices/filterSlice";
 import * as s from "./styles";
 
-interface ISort {
-  field: string;
-  value: string;
-  typeSort: string;
-}
+const list: ISort[] = [
+  {
+    field: "rating",
+    value: "популярности (ASC)",
+    typeSort: "asc",
+  },
+  { field: "rating", value: "популярности (DESC)", typeSort: "desc" },
+  { field: "price", value: "цене (ASC)", typeSort: "asc" },
+  { field: "price", value: "цене (DESC)", typeSort: "desc" },
+  { field: "title", value: "алфавиту (ASC)", typeSort: "asc" },
+  { field: "title", value: "алфавиту (DESC)", typeSort: "desc" },
+];
 
-interface ISortProps {
-  sort: ISort;
-  onChangeSort: Dispatch<SetStateAction<ISort>>;
-}
-
-const Sort = ({ sort, onChangeSort }: ISortProps) => {
+const Sort = () => {
   const [isVisible, setVisible] = useState(false);
-  const list: ISort[] = [
-    {
-      field: "rating",
-      value: "популярности (ASC)",
-      typeSort: "asc",
-    },
-    { field: "rating", value: "популярности (DESC)", typeSort: "desc" },
-    { field: "price", value: "цене (ASC)", typeSort: "asc" },
-    { field: "price", value: "цене (DESC)", typeSort: "desc" },
-    { field: "title", value: "алфавиту (ASC)", typeSort: "asc" },
-    { field: "title", value: "алфавиту (DESC)", typeSort: "desc" },
-  ];
+
+  const sort = useReduxSelector((state) => state.filter.sort);
+  const dispatch = useReduxDispatch();
 
   const changeActiveSort = (active: ISort) => {
-    onChangeSort(active);
+    dispatch(setSort(active));
     setVisible(false);
   };
 

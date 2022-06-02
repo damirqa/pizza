@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import * as base from "../../styles/base";
 
 export const Root = styled.div`
