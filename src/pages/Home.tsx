@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
@@ -33,10 +34,11 @@ const Home = () => {
     let searchQuery = search ? `search=${search}` : "";
     let query = `${categoryQuery}&${sortByQuery}&${searchQuery}`;
     console.log(query);
-    fetch("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + query)
-      .then((res) => res.json())
-      .then((arr) => {
-        setPizzas(arr);
+
+    axios
+      .get("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + query)
+      .then((res) => {
+        setPizzas(res.data);
         setIsLoading(false);
       });
   }, [categoryId, sort, search]);

@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import debounce from "lodash/debounce";
 import * as s from "./styles";
 import { SearchContext } from "../../App";
 
 const Search = () => {
+  const [localSearch, setLocalSearch] = useState("");
+  const { setSearch } = React.useContext(SearchContext);
+
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const { search, setSearch } = React.useContext(SearchContext);
+
+  // eslint-disable-next-line
+  const updateSearchValueWithLag = React.useCallback(
+    debounce((value) => setSearch(value), 1500),
+    []
+  );
+
+  const onChangeInput = (value: React.SetStateAction<string>) => {
+    setLocalSearch(value);
+    updateSearchValueWithLag(value);
+  };
 
   function clearSearch() {
-    setSearch("");
+    setLocalSearch("");
+    updateSearchValueWithLag("");
     inputRef.current?.focus();
   }
 
@@ -27,10 +42,10 @@ const Search = () => {
       <s.Input
         ref={inputRef}
         placeholder={"Search..."}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={localSearch}
+        onChange={(e) => onChangeInput(e.target.value)}
       />
-      {search && (
+      {localSearch && (
         <s.CloseSvg onClick={clearSearch} viewBox="0 0 32 32">
           <g id="cross">
             <line className="cls-1" x1="7" x2="25" y1="7" y2="25" />
