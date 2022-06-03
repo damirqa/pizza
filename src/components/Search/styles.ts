@@ -40,11 +40,23 @@ export const Input = styled.input`
   }
 `;
 
-export const svg = styled.svg`
+export const FinderSvg = styled.svg`
   width: 20px;
   height: 20px;
   position: relative;
   opacity: 0.5;
   left: 28px;
   top: 4px;
+`;
+
+export const CloseSvg = styled.svg`
+  stroke: #000;
+  stroke-width: 3px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  position: absolute;
+  right: 40px;
+  top: 15px;
+  cursor: pointer;
 `;
