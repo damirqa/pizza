@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useReduxDispatch, useReduxSelector } from "../../hooks/hooks";
 import { ISort, setSort } from "../../redux/slices/filterSlice";
 import * as s from "./styles";
@@ -18,6 +18,7 @@ export const sortList: ISort[] = [
 
 const Sort = () => {
   const [isVisible, setVisible] = useState(false);
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   const sort = useReduxSelector((state) => state.filter.sort);
   const dispatch = useReduxDispatch();
@@ -27,8 +28,21 @@ const Sort = () => {
     setVisible(false);
   };
 
+  useEffect(() => {
+    // fix type
+    const handleClickOutside = (event: any) => {
+      if (!event?.path.includes(sortRef.current)) setVisible(false);
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <s.Root>
+    <s.Root ref={sortRef}>
       <s.Block>
         <s.svg
           width="10"
