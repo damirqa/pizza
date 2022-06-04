@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import qs from "query-string";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaBlockSkeleton from "../components/skeletons/PizzaBlockSkeleton";
 import { SearchContext } from "../App";
-import { useReduxSelector } from "../hooks/hooks";
+import { sortList } from "../components/Sort";
+import { IFilterState, setFilters } from "../redux/slices/filterSlice";
+import { useReduxDispatch, useReduxSelector } from "../hooks/hooks";
+import { useNavigate } from "react-router-dom";
 
 interface IPizza {
   id: number;
@@ -19,29 +23,66 @@ interface IPizza {
 }
 
 const Home = () => {
-  const { search } = React.useContext(SearchContext);
+  const navigate = useNavigate();
+  const isFirstMounted = useRef(false);
+  const dispatch = useReduxDispatch();
 
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { search } = React.useContext(SearchContext);
   const { categoryId, sort } = useReduxSelector((state) => state.filter);
 
   useEffect(() => {
+    // get params from url
+    if (window.location.search && !isFirstMounted.current) {
+      const params = qs.parse(window.location.search);
+
+      const sort = sortList.filter(
+        (sort) => sort.field === params.sortBy && sort.typeSort === params.order
+      )[0];
+
+      const filters: IFilterState = {
+        categoryId: Number(params.category),
+        sort,
+      };
+
+      dispatch(setFilters(filters));
+      fetchPizzas();
+      isFirstMounted.current = true;
+    } else {
+      fetchPizzas();
+      const queryString = getQueryString();
+      navigate(`?${queryString}`);
+    }
     setIsLoading(true);
+  }, [categoryId, sort, search]);
 
-    let categoryQuery = categoryId ? `category=${categoryId}` : "";
-    let sortByQuery = sort ? `sortBy=${sort.field}&order=${sort.typeSort}` : "";
-    let searchQuery = search ? `search=${search}` : "";
-    let query = `${categoryQuery}&${sortByQuery}&${searchQuery}`;
-    console.log(query);
+  const getQueryString = () => {
+    const params = {
+      search: search,
+      category: categoryId > 0 ? categoryId : null,
+      sortBy: sort.field,
+      order: sort.typeSort,
+    };
 
+    const queryString = qs.stringify(params, {
+      skipNull: true,
+      skipEmptyString: true,
+    });
+
+    return queryString;
+  };
+
+  const fetchPizzas = () => {
+    const queryString = getQueryString();
     axios
-      .get("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + query)
+      .get("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + queryString)
       .then((res) => {
         setPizzas(res.data);
         setIsLoading(false);
       });
-  }, [categoryId, sort, search]);
+  };
 
   return (
     <React.Fragment>

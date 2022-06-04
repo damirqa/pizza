@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ISort {
   field: string;
-  value: string;
+  value: string | undefined;
   typeSort: string;
 }
 
-interface IFilterState {
+export interface IFilterState {
   categoryId: number;
   sort: ISort;
 }
@@ -30,8 +30,16 @@ export const filterSlice = createSlice({
     setSort: (state: IFilterState, action: PayloadAction<ISort>) => {
       state.sort = action.payload;
     },
+    setFilters: (state: IFilterState, action: PayloadAction<IFilterState>) => {
+      if (Object.keys(action).length) {
+        state.categoryId = action.payload.categoryId;
+        state.sort = action.payload.sort;
+      } else {
+        state = initialState;
+      }
+    },
   },
 });
 
-export const { setCategoryId, setSort } = filterSlice.actions;
+export const { setCategoryId, setSort, setFilters } = filterSlice.actions;
 export default filterSlice.reducer;

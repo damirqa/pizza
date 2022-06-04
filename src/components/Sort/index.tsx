@@ -3,7 +3,7 @@ import { useReduxDispatch, useReduxSelector } from "../../hooks/hooks";
 import { ISort, setSort } from "../../redux/slices/filterSlice";
 import * as s from "./styles";
 
-const list: ISort[] = [
+export const sortList: ISort[] = [
   {
     field: "rating",
     value: "популярности (ASC)",
@@ -50,7 +50,7 @@ const Sort = () => {
       {isVisible && (
         <s.Popup>
           <s.List>
-            {list.map((object, index) => (
+            {sortList.map((object, index) => (
               <s.Item
                 key={index}
                 onClick={() => changeActiveSort(object)}
