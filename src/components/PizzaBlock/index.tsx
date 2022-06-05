@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as s from "./styles";
+import { addItem } from "../../redux/slices/cartSlice";
+import { useReduxDispatch } from "../../hooks/hooks";
 
 interface IPizzaBlockProps {
   title: string;
@@ -22,9 +24,23 @@ const PizzaBlock = ({
 
   const typesPizza = ["тонкое", "традиционное"];
 
+  const dispatch = useReduxDispatch();
+
   useEffect(() => {
     setActiveType(types[0]);
   }, [types]);
+
+  const onClickAddButton = () => {
+    const pizza = {
+      title,
+      price,
+      imageUrl,
+      type: typesPizza[activeType],
+      size: sizes[activeSize],
+    };
+
+    dispatch(addItem(pizza));
+  };
 
   return (
     <s.Root>
@@ -56,10 +72,7 @@ const PizzaBlock = ({
       </s.Selector>
       <s.Bottom>
         <s.Price>от {price} ₽</s.Price>
-        <s.ButtonAdd
-          outline
-          onClick={() => setPizzaCount((prevState) => prevState + 1)}
-        >
+        <s.ButtonAdd outline onClick={() => onClickAddButton()}>
           <s.svg
             width="12"
             height="12"
