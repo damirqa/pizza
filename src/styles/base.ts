@@ -27,6 +27,8 @@ export const Button = styled.button<IButtonProps>`
       `;
     }
   }}
+  
+  
 
   &:hover {
     ${({ outline }) => {
@@ -47,5 +49,50 @@ export const Button = styled.button<IButtonProps>`
         `;
       }
     }}
+  }
+`;
+
+export const ButtonCircle = styled(Button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  border-width: 2px;
+`;
+
+export const ButtonAdd = styled(Button)`
+  svg {
+    margin-right: 2px;
+  }
+
+  span {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  &:hover {
+    i {
+      background-color: #fff;
+      color: #fe5f1e;
+    }
+  }
+
+  i {
+    display: inline-block;
+    border-radius: 30px;
+    background-color: #fe5f1e;
+    color: #fff;
+    font-weight: 600;
+    width: 22px;
+    height: 22px;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 22px;
+    position: relative;
+    top: -1px;
+    left: 3px;
   }
 `;
