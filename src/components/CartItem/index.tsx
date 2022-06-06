@@ -1,6 +1,11 @@
 import React from "react";
 import * as s from "./styles";
-import { ICartPosition, IPizza } from "../../redux/slices/cartSlice";
+import { useReduxDispatch } from "../../hooks/hooks";
+import {
+  ICartPosition,
+  IPizza,
+  removePosition,
+} from "../../redux/slices/cartSlice";
 
 interface CartPizza {
   pizza: IPizza;
@@ -8,6 +13,12 @@ interface CartPizza {
 }
 
 const CartItem = ({ pizza, position }: CartPizza) => {
+  const dispatch = useReduxDispatch();
+
+  const deleteItemFromCart = (pizza: IPizza) => {
+    dispatch(removePosition(pizza));
+  };
+
   return (
     <s.CartItem>
       <s.CartItemImage>
@@ -62,7 +73,7 @@ const CartItem = ({ pizza, position }: CartPizza) => {
         <b>{position.total} ₽</b>
       </s.CartItemPrice>
       <s.CartItemRemove>
-        <s.CartItemButtonRemove>
+        <s.CartItemButtonRemove onClick={() => deleteItemFromCart(pizza)}>
           <svg
             width="10"
             height="10"

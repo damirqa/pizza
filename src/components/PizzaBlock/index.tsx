@@ -32,14 +32,13 @@ const PizzaBlock = ({
 
   const onClickAddButton = () => {
     setPizzaCount((prevState) => prevState + 1);
-    const pizza = {
-      id: -1,
+    const pizza: IPizza = {
       title,
       price,
       imageUrl,
       type: typesPizza[activeType],
       size: sizes[activeSize],
-    } as IPizza;
+    };
 
     dispatch(addItem(pizza));
   };
