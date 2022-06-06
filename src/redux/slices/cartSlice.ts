@@ -69,8 +69,28 @@ export const cartSlice = createSlice({
       state.totalAmount -= state.countPizzas[id].total;
       state.countPizzas.splice(id, 1);
     },
+    addOne: (state: ICartState, action: PayloadAction<IPizza>) => {
+      const id = getPizzaIndex(state.pizzas, action.payload);
+      state.countPizzas[id].count += 1;
+      state.countPizzas[id].total += action.payload.price;
+      state.totalCount += 1;
+      state.totalAmount += action.payload.price;
+    },
+    removeOne: (state: ICartState, action) => {
+      const id = getPizzaIndex(state.pizzas, action.payload);
+      state.countPizzas[id].count -= 1;
+      state.countPizzas[id].total -= action.payload.price;
+      state.totalCount -= 1;
+      state.totalAmount -= action.payload.price;
+
+      if (state.countPizzas[id].total === 0) {
+        state.pizzas.splice(id, 1);
+        state.countPizzas.splice(id, 1);
+      }
+    },
   },
 });
 
-export const { addItem, clear, removePosition } = cartSlice.actions;
+export const { addItem, clear, removePosition, addOne, removeOne } =
+  cartSlice.actions;
 export default cartSlice.reducer;
