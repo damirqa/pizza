@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import * as base from "../../styles/base";
 
 export const Root = styled.div`
@@ -17,6 +18,10 @@ export const Container = styled.div`
 export const Logo = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const LinkFlex = styled(Link)`
+  display: flex;
 `;
 
 export const ImgLogo = styled.img`

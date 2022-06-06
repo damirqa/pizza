@@ -13,13 +13,13 @@ const Header = () => {
     <s.Root>
       <s.Container>
         <s.Logo>
-          <Link to="/">
+          <s.LinkFlex to="/">
             <s.ImgLogo width="38" src={logo} alt="Pizza logo" />
             <div>
               <s.Title>React Pizza</s.Title>
               <s.Description>самая вкусная пицца во вселенной</s.Description>
             </div>
-          </Link>
+          </s.LinkFlex>
         </s.Logo>
         <div className={"header__cart"}>
           <Search />
