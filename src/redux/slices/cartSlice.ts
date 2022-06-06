@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
 
-interface Pizza {
+export interface Pizza {
   title: string;
   price: number;
   imageUrl: string;
@@ -9,14 +9,14 @@ interface Pizza {
   size: number;
 }
 
-interface PizzaPosition {
+export interface CartPosition {
   count: number;
   total: number;
 }
 
 export interface ICartState {
   pizzas: Pizza[];
-  countPizzas: PizzaPosition[];
+  countPizzas: CartPosition[];
   totalCount: number;
   totalAmount: number;
 }

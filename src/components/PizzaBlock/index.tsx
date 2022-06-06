@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as s from "./styles";
-import { addItem } from "../../redux/slices/cartSlice";
+import { addItem, Pizza } from "../../redux/slices/cartSlice";
 import { useReduxDispatch } from "../../hooks/hooks";
 
 interface IPizzaBlockProps {
@@ -31,13 +31,15 @@ const PizzaBlock = ({
   }, [types]);
 
   const onClickAddButton = () => {
+    setPizzaCount((prevState) => prevState + 1);
     const pizza = {
+      id: -1,
       title,
       price,
       imageUrl,
       type: typesPizza[activeType],
       size: sizes[activeSize],
-    };
+    } as Pizza;
 
     dispatch(addItem(pizza));
   };

@@ -24,7 +24,7 @@ const Header = () => {
         <div className={"header__cart"}>
           <Search />
           <Link to="/cart">
-            <s.ButtonCart as="a">
+            <s.ButtonCart>
               <s.Counter>{totalAmount} ₽</s.Counter>
               <s.Delimiter />
               <s.svg
