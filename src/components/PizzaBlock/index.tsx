@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as s from "./styles";
-import { addItem, Pizza } from "../../redux/slices/cartSlice";
+import { addItem, IPizza } from "../../redux/slices/cartSlice";
 import { useReduxDispatch } from "../../hooks/hooks";
 
 interface IPizzaBlockProps {
@@ -39,7 +39,7 @@ const PizzaBlock = ({
       imageUrl,
       type: typesPizza[activeType],
       size: sizes[activeSize],
-    } as Pizza;
+    } as IPizza;
 
     dispatch(addItem(pizza));
   };

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
 
-export interface Pizza {
+export interface IPizza {
   title: string;
   price: number;
   imageUrl: string;
@@ -9,14 +9,14 @@ export interface Pizza {
   size: number;
 }
 
-export interface CartPosition {
+export interface ICartPosition {
   count: number;
   total: number;
 }
 
 export interface ICartState {
-  pizzas: Pizza[];
-  countPizzas: CartPosition[];
+  pizzas: IPizza[];
+  countPizzas: ICartPosition[];
   totalCount: number;
   totalAmount: number;
 }
@@ -28,7 +28,7 @@ const initialState: ICartState = {
   totalAmount: 0,
 };
 
-function getPizzaIndex(pizzas: Pizza[], pizza: Pizza) {
+function getPizzaIndex(pizzas: IPizza[], pizza: IPizza) {
   let PizzaId = -1;
   pizzas.forEach((value, index) => {
     if (_.isEqual(value, pizza)) PizzaId = index;
@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state: ICartState, action: PayloadAction<Pizza>) => {
+    addItem: (state: ICartState, action: PayloadAction<IPizza>) => {
       let PizzaId = getPizzaIndex(state.pizzas, action.payload);
 
       if (PizzaId === -1) {
@@ -56,8 +56,14 @@ export const cartSlice = createSlice({
         state.totalAmount += action.payload.price;
       }
     },
+    clear: (state: ICartState) => {
+      state.pizzas = [];
+      state.countPizzas = [];
+      state.totalCount = 0;
+      state.totalAmount = 0;
+    },
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, clear } = cartSlice.actions;
 export default cartSlice.reducer;

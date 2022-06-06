@@ -3,17 +3,24 @@ import * as s from "./styles";
 import { useReduxSelector } from "../../hooks/hooks";
 import CartEmpty from "../../components/CartEmpty";
 import { Link } from "react-router-dom";
-import { CartPosition, Pizza } from "../../redux/slices/cartSlice";
+import { ICartPosition, IPizza, clear } from "../../redux/slices/cartSlice";
 import CartItem from "../../components/CartItem";
+import { useReduxDispatch } from "../../hooks/hooks";
 
 const Cart = () => {
   const totalCount = useReduxSelector((state) => state.cart.totalCount);
   const totalAmount = useReduxSelector((state) => state.cart.totalAmount);
 
-  const pizzas: Pizza[] = useReduxSelector((state) => state.cart.pizzas);
-  const cartPizzas: CartPosition[] = useReduxSelector(
+  const pizzas: IPizza[] = useReduxSelector((state) => state.cart.pizzas);
+  const cartPizzas: ICartPosition[] = useReduxSelector(
     (state) => state.cart.countPizzas
   );
+
+  const dispatch = useReduxDispatch();
+
+  const clearCart = () => {
+    dispatch(clear());
+  };
 
   if (!totalCount) return <CartEmpty />;
 
@@ -89,7 +96,9 @@ const Cart = () => {
               strokeLinejoin="round"
             />
           </s.ClearCartSvg>
-          <s.ClearCartButtonLabel>Очистить корзину</s.ClearCartButtonLabel>
+          <s.ClearCartButtonLabel onClick={clearCart}>
+            Очистить корзину
+          </s.ClearCartButtonLabel>
         </s.ClearCartButton>
       </s.CartTop>
       <div className="cart__center">

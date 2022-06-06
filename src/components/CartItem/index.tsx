@@ -1,10 +1,10 @@
 import React from "react";
 import * as s from "./styles";
-import { CartPosition, Pizza } from "../../redux/slices/cartSlice";
+import { ICartPosition, IPizza } from "../../redux/slices/cartSlice";
 
 interface CartPizza {
-  pizza: Pizza;
-  position: CartPosition;
+  pizza: IPizza;
+  position: ICartPosition;
 }
 
 const CartItem = ({ pizza, position }: CartPizza) => {
