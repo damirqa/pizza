@@ -1,13 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
-
-export interface IPizza {
-  title: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  size: number;
-}
+import { IPizza } from "./pizzasSlice";
 
 export interface ICartPosition {
   count: number;

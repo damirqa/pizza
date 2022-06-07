@@ -3,9 +3,10 @@ import * as s from "./styles";
 import { useReduxSelector } from "../../hooks/hooks";
 import CartEmpty from "../../components/CartEmpty";
 import { Link } from "react-router-dom";
-import { ICartPosition, IPizza, clear } from "../../redux/slices/cartSlice";
+import { ICartPosition, clear } from "../../redux/slices/cartSlice";
 import CartItem from "../../components/CartItem";
 import { useReduxDispatch } from "../../hooks/hooks";
+import { IPizza } from "../../redux/slices/pizzasSlice";
 
 const Cart = () => {
   const totalCount = useReduxSelector((state) => state.cart.totalCount);

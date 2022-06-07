@@ -3,11 +3,11 @@ import * as s from "./styles";
 import { useReduxDispatch } from "../../hooks/hooks";
 import {
   ICartPosition,
-  IPizza,
   removePosition,
   addOne,
   removeOne,
 } from "../../redux/slices/cartSlice";
+import { IPizza } from "../../redux/slices/pizzasSlice";
 
 interface CartPizza {
   pizza: IPizza;

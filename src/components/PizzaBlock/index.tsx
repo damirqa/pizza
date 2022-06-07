@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as s from "./styles";
-import { addItem, IPizza } from "../../redux/slices/cartSlice";
+import { addItem } from "../../redux/slices/cartSlice";
 import { useReduxDispatch } from "../../hooks/hooks";
+import { IPizza } from "../../redux/slices/pizzasSlice";
 
 interface IPizzaBlockProps {
   title: string;
