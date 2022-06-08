@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
-import { IPizza } from "./pizzasSlice";
+import { IPizzaBlock } from "../../components/PizzaBlock";
 
 export interface ICartPosition {
   count: number;
@@ -8,7 +8,7 @@ export interface ICartPosition {
 }
 
 export interface ICartState {
-  pizzas: IPizza[];
+  pizzas: IPizzaBlock[];
   countPizzas: ICartPosition[];
   totalCount: number;
   totalAmount: number;
@@ -21,7 +21,7 @@ const initialState: ICartState = {
   totalAmount: 0,
 };
 
-function getPizzaIndex(pizzas: IPizza[], pizza: IPizza) {
+function getPizzaIndex(pizzas: IPizzaBlock[], pizza: IPizzaBlock) {
   let PizzaId = -1;
   pizzas.forEach((value, index) => {
     if (_.isEqual(value, pizza)) PizzaId = index;
@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addItem: (state: ICartState, action: PayloadAction<IPizza>) => {
+    addItem: (state: ICartState, action: PayloadAction<IPizzaBlock>) => {
       let PizzaId = getPizzaIndex(state.pizzas, action.payload);
 
       if (PizzaId === -1) {
@@ -55,21 +55,21 @@ export const cartSlice = createSlice({
       state.totalCount = 0;
       state.totalAmount = 0;
     },
-    removePosition: (state: ICartState, action: PayloadAction<IPizza>) => {
+    removePosition: (state: ICartState, action: PayloadAction<IPizzaBlock>) => {
       const id = getPizzaIndex(state.pizzas, action.payload);
       state.pizzas.splice(id, 1);
       state.totalCount -= state.countPizzas[id].count;
       state.totalAmount -= state.countPizzas[id].total;
       state.countPizzas.splice(id, 1);
     },
-    addOne: (state: ICartState, action: PayloadAction<IPizza>) => {
+    addOne: (state: ICartState, action: PayloadAction<IPizzaBlock>) => {
       const id = getPizzaIndex(state.pizzas, action.payload);
       state.countPizzas[id].count += 1;
       state.countPizzas[id].total += action.payload.price;
       state.totalCount += 1;
       state.totalAmount += action.payload.price;
     },
-    removeOne: (state: ICartState, action) => {
+    removeOne: (state: ICartState, action: PayloadAction<IPizzaBlock>) => {
       const id = getPizzaIndex(state.pizzas, action.payload);
       state.countPizzas[id].count -= 1;
       state.countPizzas[id].total -= action.payload.price;

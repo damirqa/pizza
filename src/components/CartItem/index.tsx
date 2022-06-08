@@ -7,25 +7,25 @@ import {
   addOne,
   removeOne,
 } from "../../redux/slices/cartSlice";
-import { IPizza } from "../../redux/slices/pizzasSlice";
+import { IPizzaBlock } from "../PizzaBlock";
 
 interface CartPizza {
-  pizza: IPizza;
+  pizza: IPizzaBlock;
   position: ICartPosition;
 }
 
 const CartItem = ({ pizza, position }: CartPizza) => {
   const dispatch = useReduxDispatch();
 
-  const deleteItemFromCart = (pizza: IPizza) => {
+  const deleteItemFromCart = (pizza: IPizzaBlock) => {
     dispatch(removePosition(pizza));
   };
 
-  const addOneToPosition = (pizza: IPizza) => {
+  const addOneToPosition = (pizza: IPizzaBlock) => {
     dispatch(addOne(pizza));
   };
 
-  const removeOneFromPosition = (pizza: IPizza) => {
+  const removeOneFromPosition = (pizza: IPizzaBlock) => {
     dispatch(removeOne(pizza));
   };
 

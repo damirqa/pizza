@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import { ICartPosition, clear } from "../../redux/slices/cartSlice";
 import CartItem from "../../components/CartItem";
 import { useReduxDispatch } from "../../hooks/hooks";
-import { IPizza } from "../../redux/slices/pizzasSlice";
+import { IPizzaBlock } from "../../components/PizzaBlock";
 
 const Cart = () => {
   const totalCount = useReduxSelector((state) => state.cart.totalCount);
   const totalAmount = useReduxSelector((state) => state.cart.totalAmount);
 
-  const pizzas: IPizza[] = useReduxSelector((state) => state.cart.pizzas);
+  const pizzas: IPizzaBlock[] = useReduxSelector((state) => state.cart.pizzas);
   const cartPizzas: ICartPosition[] = useReduxSelector(
     (state) => state.cart.countPizzas
   );

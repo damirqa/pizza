@@ -4,21 +4,15 @@ import { addItem } from "../../redux/slices/cartSlice";
 import { useReduxDispatch } from "../../hooks/hooks";
 import { IPizza } from "../../redux/slices/pizzasSlice";
 
-interface IPizzaBlockProps {
+export interface IPizzaBlock {
   title: string;
   price: number;
   imageUrl: string;
-  sizes: number[];
-  types: number[];
+  size: number;
+  type: string;
 }
 
-const PizzaBlock = ({
-  title,
-  price,
-  imageUrl,
-  sizes,
-  types,
-}: IPizzaBlockProps) => {
+const PizzaBlock = ({ title, price, imageUrl, sizes, types }: IPizza) => {
   const [pizzaCount, setPizzaCount] = useState(0);
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
@@ -33,7 +27,7 @@ const PizzaBlock = ({
 
   const onClickAddButton = () => {
     setPizzaCount((prevState) => prevState + 1);
-    const pizza: IPizza = {
+    const pizza: IPizzaBlock = {
       title,
       price,
       imageUrl,

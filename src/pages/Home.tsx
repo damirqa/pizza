@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useRef } from "react";
 import qs from "query-string";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
@@ -8,27 +7,16 @@ import PizzaBlockSkeleton from "../components/skeletons/PizzaBlockSkeleton";
 import { SearchContext } from "../App";
 import { sortList } from "../components/Sort";
 import { IFilterState, setFilters } from "../redux/slices/filterSlice";
+import { fetchFilteredPizzas } from "../redux/slices/pizzasSlice";
 import { useReduxDispatch, useReduxSelector } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
-
-interface IPizza {
-  id: number;
-  imageUrl: string;
-  title: string;
-  types: number[];
-  sizes: number[];
-  price: number;
-  category: number;
-  rating: number;
-}
 
 const Home = () => {
   const navigate = useNavigate();
   const isFirstMounted = useRef(false);
   const dispatch = useReduxDispatch();
 
-  const [pizzas, setPizzas] = useState<IPizza[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const pizzasState = useReduxSelector((state) => state.pizzas);
 
   const { search } = React.useContext(SearchContext);
   const { categoryId, sort } = useReduxSelector((state) => state.filter);
@@ -55,7 +43,6 @@ const Home = () => {
       const queryString = getQueryString();
       navigate(`?${queryString}`);
     }
-    setIsLoading(true);
   }, [categoryId, sort, search]);
 
   const getQueryString = () => {
@@ -76,12 +63,7 @@ const Home = () => {
 
   const fetchPizzas = () => {
     const queryString = getQueryString();
-    axios
-      .get("https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + queryString)
-      .then((res) => {
-        setPizzas(res.data);
-        setIsLoading(false);
-      });
+    dispatch(fetchFilteredPizzas(queryString));
   };
 
   return (
@@ -92,11 +74,13 @@ const Home = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {isLoading
+        {pizzasState.status === "pending"
           ? [...new Array(6)].map((_, index) => (
               <PizzaBlockSkeleton key={index} />
             ))
-          : pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+          : pizzasState.items.map((pizza) => (
+              <PizzaBlock key={pizza.id} {...pizza} />
+            ))}
       </div>
     </React.Fragment>
   );
