@@ -4,7 +4,6 @@ import Categories from "../components/Categories";
 import Sort, { sortList } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaBlockSkeleton from "../components/skeletons/PizzaBlockSkeleton";
-import { SearchContext } from "../App";
 import {
   IFilterState,
   selectFilter,
@@ -21,8 +20,7 @@ const Home = () => {
 
   const pizzasState = useTypedSelector(selectPizzas);
 
-  const { search } = React.useContext(SearchContext);
-  const { categoryId, sort } = useTypedSelector(selectFilter);
+  const { search, categoryId, sort } = useTypedSelector(selectFilter);
 
   useEffect(() => {
     // get params from url

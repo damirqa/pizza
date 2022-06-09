@@ -27,6 +27,9 @@ export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
+    setSearch: (state: IFilterState, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
     setCategoryId: (state: IFilterState, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
     },
@@ -45,9 +48,12 @@ export const filterSlice = createSlice({
 });
 
 export const selectFilter = (state: ReduxRootState) => state.filter;
+
 export const selectCategoryId = (state: ReduxRootState) =>
   state.filter.categoryId;
+
 export const selectSort = (state: ReduxRootState) => state.filter.sort;
 
-export const { setCategoryId, setSort, setFilters } = filterSlice.actions;
+export const { setSearch, setCategoryId, setSort, setFilters } =
+  filterSlice.actions;
 export default filterSlice.reducer;

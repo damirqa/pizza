@@ -1,17 +1,18 @@
 import React, { useState } from "react";
+import { useTypedDispatch } from "../../hooks/hooks";
+import { setSearch } from "../../redux/slices/filterSlice";
 import debounce from "lodash/debounce";
 import * as s from "./styles";
-import { SearchContext } from "../../App";
 
 const Search = () => {
   const [localSearch, setLocalSearch] = useState("");
-  const { setSearch } = React.useContext(SearchContext);
 
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const dispatch = useTypedDispatch();
 
   // eslint-disable-next-line
   const updateSearchValueWithLag = React.useCallback(
-    debounce((value) => setSearch(value), 1500),
+    debounce((value) => dispatch(setSearch(value)), 1500),
     []
   );
 
