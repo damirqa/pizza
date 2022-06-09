@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _ from "lodash";
 import { IPizzaBlock } from "../../components/PizzaBlock";
+import { ReduxRootState } from "../store";
 
 export interface ICartPosition {
   count: number;
@@ -84,6 +85,9 @@ export const cartSlice = createSlice({
   },
 });
 
+export const selectCart = (state: ReduxRootState) => state.cart;
+
 export const { addItem, clear, removePosition, addOne, removeOne } =
   cartSlice.actions;
+
 export default cartSlice.reducer;

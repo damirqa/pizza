@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as s from "./styles";
 import { addItem } from "../../redux/slices/cartSlice";
-import { useReduxDispatch } from "../../hooks/hooks";
+import { useTypedDispatch } from "../../hooks/hooks";
 import { IPizza } from "../../redux/slices/pizzasSlice";
 
 export interface IPizzaBlock {
@@ -19,7 +19,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }: IPizza) => {
 
   const typesPizza = ["тонкое", "традиционное"];
 
-  const dispatch = useReduxDispatch();
+  const dispatch = useTypedDispatch();
 
   useEffect(() => {
     setActiveType(types[0]);

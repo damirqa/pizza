@@ -1,25 +1,28 @@
 import React, { useEffect, useRef } from "react";
 import qs from "query-string";
 import Categories from "../components/Categories";
-import Sort from "../components/Sort";
+import Sort, { sortList } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaBlockSkeleton from "../components/skeletons/PizzaBlockSkeleton";
 import { SearchContext } from "../App";
-import { sortList } from "../components/Sort";
-import { IFilterState, setFilters } from "../redux/slices/filterSlice";
-import { fetchFilteredPizzas } from "../redux/slices/pizzasSlice";
-import { useReduxDispatch, useReduxSelector } from "../hooks/hooks";
+import {
+  IFilterState,
+  selectFilter,
+  setFilters,
+} from "../redux/slices/filterSlice";
+import { fetchFilteredPizzas, selectPizzas } from "../redux/slices/pizzasSlice";
+import { useTypedDispatch, useTypedSelector } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
   const isFirstMounted = useRef(false);
-  const dispatch = useReduxDispatch();
+  const dispatch = useTypedDispatch();
 
-  const pizzasState = useReduxSelector((state) => state.pizzas);
+  const pizzasState = useTypedSelector(selectPizzas);
 
   const { search } = React.useContext(SearchContext);
-  const { categoryId, sort } = useReduxSelector((state) => state.filter);
+  const { categoryId, sort } = useTypedSelector(selectFilter);
 
   useEffect(() => {
     // get params from url
@@ -31,6 +34,7 @@ const Home = () => {
       )[0];
 
       const filters: IFilterState = {
+        search: "",
         categoryId: Number(params.category),
         sort,
       };
@@ -53,12 +57,10 @@ const Home = () => {
       order: sort.typeSort,
     };
 
-    const queryString = qs.stringify(params, {
+    return qs.stringify(params, {
       skipNull: true,
       skipEmptyString: true,
     });
-
-    return queryString;
   };
 
   const fetchPizzas = () => {

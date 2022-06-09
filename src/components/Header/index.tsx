@@ -3,11 +3,11 @@ import * as s from "./styles";
 import logo from "../../assets/img/pizza-logo.svg";
 import Search from "../Search";
 import { Link } from "react-router-dom";
-import { useReduxSelector } from "../../hooks/hooks";
+import { useTypedSelector } from "../../hooks/hooks";
+import { selectCart } from "../../redux/slices/cartSlice";
 
 const Header = () => {
-  const totalCount = useReduxSelector((state) => state.cart.totalCount);
-  const totalAmount = useReduxSelector((state) => state.cart.totalAmount);
+  const { totalCount, totalAmount } = useTypedSelector(selectCart);
 
   return (
     <s.Root>

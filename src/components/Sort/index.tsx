@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useReduxDispatch, useReduxSelector } from "../../hooks/hooks";
-import { ISort, setSort } from "../../redux/slices/filterSlice";
+import { useTypedSelector, useTypedDispatch } from "../../hooks/hooks";
+import { ISort, selectSort, setSort } from "../../redux/slices/filterSlice";
 import * as s from "./styles";
 
 export const sortList: ISort[] = [
@@ -20,8 +20,8 @@ const Sort = () => {
   const [isVisible, setVisible] = useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
-  const sort = useReduxSelector((state) => state.filter.sort);
-  const dispatch = useReduxDispatch();
+  const sort = useTypedSelector(selectSort);
+  const dispatch = useTypedDispatch();
 
   const changeActiveSort = (active: ISort) => {
     dispatch(setSort(active));

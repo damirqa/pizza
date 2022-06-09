@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { ReduxRootState } from "../store";
 
 export const fetchFilteredPizzas = createAsyncThunk(
   "pizzas/fetchFiltered",
@@ -7,8 +8,6 @@ export const fetchFilteredPizzas = createAsyncThunk(
     const { data } = await axios.get<IPizza[]>(
       "https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + queryString
     );
-
-    console.log(data);
     return data;
   }
 );
@@ -62,6 +61,8 @@ export const pizzasSlice = createSlice({
     });
   },
 });
+
+export const selectPizzas = (state: ReduxRootState) => state.pizzas;
 
 export const { setItems } = pizzasSlice.actions;
 export default pizzasSlice.reducer;

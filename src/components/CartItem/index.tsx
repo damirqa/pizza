@@ -1,6 +1,6 @@
 import React from "react";
 import * as s from "./styles";
-import { useReduxDispatch } from "../../hooks/hooks";
+import { useTypedDispatch } from "../../hooks/hooks";
 import {
   ICartPosition,
   removePosition,
@@ -15,7 +15,7 @@ interface CartPizza {
 }
 
 const CartItem = ({ pizza, position }: CartPizza) => {
-  const dispatch = useReduxDispatch();
+  const dispatch = useTypedDispatch();
 
   const deleteItemFromCart = (pizza: IPizzaBlock) => {
     dispatch(removePosition(pizza));

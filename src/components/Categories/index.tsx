@@ -1,7 +1,10 @@
 import React from "react";
 import * as s from "./styles";
-import { useReduxDispatch, useReduxSelector } from "../../hooks/hooks";
-import { setCategoryId } from "../../redux/slices/filterSlice";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/hooks";
+import {
+  selectCategoryId,
+  setCategoryId,
+} from "../../redux/slices/filterSlice";
 
 const Categories = () => {
   const categories = [
@@ -13,8 +16,8 @@ const Categories = () => {
     "Закрытые",
   ];
 
-  const categoryId = useReduxSelector((state) => state.filter.categoryId);
-  const dispatch = useReduxDispatch();
+  const categoryId = useTypedSelector(selectCategoryId);
+  const dispatch = useTypedDispatch();
 
   return (
     <s.Root>

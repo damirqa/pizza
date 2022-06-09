@@ -1,23 +1,16 @@
 import React from "react";
 import * as s from "./styles";
-import { useReduxSelector } from "../../hooks/hooks";
 import CartEmpty from "../../components/CartEmpty";
 import { Link } from "react-router-dom";
-import { ICartPosition, clear } from "../../redux/slices/cartSlice";
+import { clear, selectCart } from "../../redux/slices/cartSlice";
 import CartItem from "../../components/CartItem";
-import { useReduxDispatch } from "../../hooks/hooks";
-import { IPizzaBlock } from "../../components/PizzaBlock";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/hooks";
 
 const Cart = () => {
-  const totalCount = useReduxSelector((state) => state.cart.totalCount);
-  const totalAmount = useReduxSelector((state) => state.cart.totalAmount);
+  const { totalCount, totalAmount, pizzas, countPizzas } =
+    useTypedSelector(selectCart);
 
-  const pizzas: IPizzaBlock[] = useReduxSelector((state) => state.cart.pizzas);
-  const cartPizzas: ICartPosition[] = useReduxSelector(
-    (state) => state.cart.countPizzas
-  );
-
-  const dispatch = useReduxDispatch();
+  const dispatch = useTypedDispatch();
 
   const clearCart = () => {
     dispatch(clear());
@@ -104,7 +97,7 @@ const Cart = () => {
       </s.CartTop>
       <div className="cart__center">
         {pizzas.map((value, index) => (
-          <CartItem key={index} pizza={value} position={cartPizzas[index]} />
+          <CartItem key={index} pizza={value} position={countPizzas[index]} />
         ))}
       </div>
       <s.CartBottom>
