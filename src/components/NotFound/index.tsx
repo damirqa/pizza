@@ -1,7 +1,7 @@
 import React from "react";
 import { Root, Title, Smile, Description } from "./styles";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <Root>
       <Title>

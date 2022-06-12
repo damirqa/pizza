@@ -13,7 +13,7 @@ import { fetchFilteredPizzas, selectPizzas } from "../redux/slices/pizzasSlice";
 import { useTypedDispatch, useTypedSelector } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const isFirstMounted = useRef(false);
   const dispatch = useTypedDispatch();

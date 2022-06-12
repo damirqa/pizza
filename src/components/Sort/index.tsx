@@ -16,7 +16,7 @@ export const sortList: ISort[] = [
   { field: "title", value: "алфавиту (DESC)", typeSort: "desc" },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 

@@ -14,7 +14,7 @@ interface CartPizza {
   position: ICartPosition;
 }
 
-const CartItem = ({ pizza, position }: CartPizza) => {
+const CartItem: React.FC<CartPizza> = ({ pizza, position }: CartPizza) => {
   const dispatch = useTypedDispatch();
 
   const deleteItemFromCart = (pizza: IPizzaBlock) => {

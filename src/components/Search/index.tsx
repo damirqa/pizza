@@ -4,7 +4,7 @@ import { setSearch } from "../../redux/slices/filterSlice";
 import debounce from "lodash/debounce";
 import * as s from "./styles";
 
-const Search = () => {
+const Search: React.FC = () => {
   const [localSearch, setLocalSearch] = useState("");
 
   const inputRef = React.useRef<HTMLInputElement>(null);

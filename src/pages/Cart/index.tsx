@@ -6,7 +6,7 @@ import { clear, selectCart } from "../../redux/slices/cartSlice";
 import CartItem from "../../components/CartItem";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/hooks";
 
-const Cart = () => {
+const Cart: React.FC = () => {
   const { totalCount, totalAmount, pizzas, countPizzas } =
     useTypedSelector(selectCart);
 

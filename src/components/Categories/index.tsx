@@ -6,7 +6,7 @@ import {
   setCategoryId,
 } from "../../redux/slices/filterSlice";
 
-const Categories = () => {
+const Categories: React.FC = () => {
   const categories = [
     "Все",
     "Мясные",

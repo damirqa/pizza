@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/hooks";
 import { selectCart } from "../../redux/slices/cartSlice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const { totalCount, totalAmount } = useTypedSelector(selectCart);
 
   return (

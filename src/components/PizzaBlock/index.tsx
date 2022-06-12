@@ -12,7 +12,13 @@ export interface IPizzaBlock {
   type: string;
 }
 
-const PizzaBlock = ({ title, price, imageUrl, sizes, types }: IPizza) => {
+const PizzaBlock: React.FC<IPizza> = ({
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}: IPizza) => {
   const [pizzaCount, setPizzaCount] = useState(0);
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
