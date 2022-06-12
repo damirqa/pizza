@@ -18,7 +18,7 @@ const PizzaBlock: React.FC<IPizza> = ({
   imageUrl,
   sizes,
   types,
-}: IPizza) => {
+}) => {
   const [pizzaCount, setPizzaCount] = useState<number>(0);
   const [activeType, setActiveType] = useState<number>(0);
   const [activeSize, setActiveSize] = useState<number>(0);

@@ -64,7 +64,7 @@ const Sort: React.FC = () => {
       {isVisible && (
         <s.Popup>
           <s.List>
-            {sortList.map((object, index) => (
+            {sortList.map((object, index: number) => (
               <s.Item
                 key={index}
                 onClick={() => changeActiveSort(object)}

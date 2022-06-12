@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const isFirstMounted = useRef(false);
+  const isFirstMounted = useRef<boolean>(false);
   const dispatch = useTypedDispatch();
 
   const pizzasState = useTypedSelector(selectPizzas);
