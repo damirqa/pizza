@@ -19,9 +19,9 @@ const PizzaBlock: React.FC<IPizza> = ({
   sizes,
   types,
 }: IPizza) => {
-  const [pizzaCount, setPizzaCount] = useState(0);
-  const [activeType, setActiveType] = useState(0);
-  const [activeSize, setActiveSize] = useState(0);
+  const [pizzaCount, setPizzaCount] = useState<number>(0);
+  const [activeType, setActiveType] = useState<number>(0);
+  const [activeSize, setActiveSize] = useState<number>(0);
 
   const typesPizza = ["тонкое", "традиционное"];
 

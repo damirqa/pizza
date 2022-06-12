@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import * as s from "./styles";
 
 const Search: React.FC = () => {
-  const [localSearch, setLocalSearch] = useState("");
+  const [localSearch, setLocalSearch] = useState<string>("");
 
   const inputRef = React.useRef<HTMLInputElement>(null);
   const dispatch = useTypedDispatch();

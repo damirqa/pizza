@@ -17,7 +17,7 @@ export const sortList: ISort[] = [
 ];
 
 const Sort: React.FC = () => {
-  const [isVisible, setVisible] = useState(false);
+  const [isVisible, setVisible] = useState<boolean>(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   const sort = useTypedSelector(selectSort);
