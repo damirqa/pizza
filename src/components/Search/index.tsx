@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useTypedDispatch } from "../../hooks/hooks";
 import { setSearch } from "../../redux/slices/filterSlice";
 import debounce from "lodash/debounce";
@@ -44,7 +44,9 @@ const Search: React.FC = () => {
         ref={inputRef}
         placeholder={"Search..."}
         value={localSearch}
-        onChange={(e) => onChangeInput(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChangeInput(e.target.value)
+        }
       />
       {localSearch && (
         <s.CloseSvg onClick={clearSearch} viewBox="0 0 32 32">
