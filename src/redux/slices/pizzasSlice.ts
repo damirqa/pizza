@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ReduxRootState } from "../store";
 
-export const fetchFilteredPizzas = createAsyncThunk(
+export const fetchFilteredPizzas = createAsyncThunk<IPizza[], string>(
   "pizzas/fetchFiltered",
-  async (queryString: string) => {
+  async (queryString) => {
     const { data } = await axios.get<IPizza[]>(
       "https://628706c7e9494df61b30ccdf.mockapi.io/pizzas?" + queryString
     );
