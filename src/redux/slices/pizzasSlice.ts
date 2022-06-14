@@ -23,14 +23,21 @@ export interface IPizza {
   rating: number;
 }
 
+enum Status {
+  IDLE = "idle",
+  PENDING = "pending",
+  SUCCESS = "success",
+  FAILED = "failed",
+}
+
 interface IPizzasState {
   items: IPizza[];
-  status: "idle" | "pending" | "succeeded" | "failed";
+  status: Status;
 }
 
 const initialState: IPizzasState = {
   items: [],
-  status: "idle",
+  status: Status.IDLE,
 };
 
 export const pizzasSlice = createSlice({
@@ -43,20 +50,20 @@ export const pizzasSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFilteredPizzas.pending, (state: IPizzasState) => {
-      state.status = "pending";
+      state.status = Status.PENDING;
       state.items = [];
     });
 
     builder.addCase(
       fetchFilteredPizzas.fulfilled,
       (state: IPizzasState, action: PayloadAction<IPizza[]>) => {
-        state.status = "succeeded";
+        state.status = Status.SUCCESS;
         state.items = action.payload;
       }
     );
 
     builder.addCase(fetchFilteredPizzas.rejected, (state: IPizzasState) => {
-      state.status = "failed";
+      state.status = Status.FAILED;
       state.items = [];
     });
   },
