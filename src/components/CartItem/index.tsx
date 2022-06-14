@@ -14,7 +14,8 @@ interface CartPizza {
   position: ICartPosition;
 }
 
-const CartItem: React.FC<CartPizza> = ({ pizza, position }) => {
+// Stop rerender component when we +/- item in cart
+const CartItem: React.FC<CartPizza> = React.memo(({ pizza, position }) => {
   const dispatch = useTypedDispatch();
 
   const deleteItemFromCart = (pizza: IPizzaBlock) => {
@@ -100,6 +101,6 @@ const CartItem: React.FC<CartPizza> = ({ pizza, position }) => {
       </s.CartItemRemove>
     </s.CartItem>
   );
-};
+});
 
 export default CartItem;
