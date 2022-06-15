@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ReduxRootState } from "../store";
+import { getQueryStringFromUrl } from "../../utils/queryString";
 
 export interface ISort {
   field: string;
@@ -13,15 +14,17 @@ export interface IFilterState {
   sort: ISort;
 }
 
-const initialState: IFilterState = {
-  search: "",
-  categoryId: 0,
-  sort: {
-    field: "rating",
-    value: "популярности (ASC)",
-    typeSort: "asc",
-  },
-};
+const initialState: IFilterState = getQueryStringFromUrl();
+
+// const initialState: IFilterState = {
+//   search: "",
+//   categoryId: 0,
+//   sort: {
+//     field: "rating",
+//     value: "популярности (ASC)",
+//     typeSort: "asc",
+//   },
+// };
 
 export const filterSlice = createSlice({
   name: "filter",

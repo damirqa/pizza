@@ -3,16 +3,23 @@ import * as s from "./styles";
 import logo from "../../assets/img/pizza-logo.svg";
 import Search from "../Search";
 import { Link } from "react-router-dom";
-import { useTypedSelector } from "../../hooks/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/hooks";
 import { selectCart } from "../../redux/slices/cartSlice";
+import { setFilters } from "../../redux/slices/filterSlice";
+import { DEFAULT_FILTERS } from "../../utils/queryString";
 
 const Header: React.FC = () => {
   const { totalCount, totalAmount } = useTypedSelector(selectCart);
+  const dispatch = useTypedDispatch();
+
+  const setDefaultFilters = () => {
+    dispatch(setFilters(DEFAULT_FILTERS));
+  };
 
   return (
     <s.Root>
       <s.Container>
-        <s.Logo>
+        <s.Logo onClick={() => setDefaultFilters()}>
           <s.LinkFlex to="/">
             <s.ImgLogo width="38" src={logo} alt="Pizza logo" />
             <div>

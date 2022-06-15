@@ -1,70 +1,36 @@
-import React, { useEffect, useRef } from "react";
-import qs from "query-string";
+import React, { useEffect } from "react";
 import Categories from "../components/Categories";
-import Sort, { sortList } from "../components/Sort";
+import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaBlockSkeleton from "../components/skeletons/PizzaBlockSkeleton";
-import {
-  IFilterState,
-  selectFilter,
-  setFilters,
-} from "../redux/slices/filterSlice";
+import { selectFilter } from "../redux/slices/filterSlice";
 import { fetchFilteredPizzas, selectPizzas } from "../redux/slices/pizzasSlice";
 import { useTypedDispatch, useTypedSelector } from "../hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { DEFAULT_FILTERS, getQueryStringFromStore } from "../utils/queryString";
+import _ from "lodash";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const isFirstMounted = useRef<boolean>(false);
   const dispatch = useTypedDispatch();
 
+  const filters = useTypedSelector(selectFilter);
   const pizzasState = useTypedSelector(selectPizzas);
 
-  const { search, categoryId, sort } = useTypedSelector(selectFilter);
-
+  //navigate and dispatch in deps array because eslint wants it - no rerender
+  // remove if this call rerender and set comment with text eslint disable next line
   useEffect(() => {
-    // get params from url
-    if (window.location.search && !isFirstMounted.current) {
-      const params = qs.parse(window.location.search);
-
-      const sort = sortList.filter(
-        (sort) => sort.field === params.sortBy && sort.typeSort === params.order
-      )[0];
-
-      const filters: IFilterState = {
-        search: "",
-        categoryId: Number(params.category),
-        sort,
-      };
-
-      dispatch(setFilters(filters));
-      fetchPizzas();
-      isFirstMounted.current = true;
-    } else {
-      fetchPizzas();
-      const queryString = getQueryString();
-      navigate(`?${queryString}`);
-    }
-  }, [categoryId, sort, search]);
-
-  const getQueryString = () => {
-    const params = {
-      search: search,
-      category: categoryId > 0 ? categoryId : null,
-      sortBy: sort.field,
-      order: sort.typeSort,
+    const fetchPizzas = () => {
+      dispatch(fetchFilteredPizzas(getQueryStringFromStore(filters)));
     };
 
-    return qs.stringify(params, {
-      skipNull: true,
-      skipEmptyString: true,
-    });
-  };
+    if (!_.isEqual(DEFAULT_FILTERS, filters)) {
+      const queryString = getQueryStringFromStore(filters);
+      navigate(`?${queryString}`);
+    }
 
-  const fetchPizzas = () => {
-    const queryString = getQueryString();
-    dispatch(fetchFilteredPizzas(queryString));
-  };
+    fetchPizzas();
+  }, [filters, navigate, dispatch]);
 
   return (
     <React.Fragment>
