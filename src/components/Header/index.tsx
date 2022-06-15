@@ -23,8 +23,10 @@ const Header: React.FC = () => {
           <s.LinkFlex to="/">
             <s.ImgLogo width="38" src={logo} alt="Pizza logo" />
             <div>
-              <s.Title>React Pizza</s.Title>
-              <s.Description>самая вкусная пицца во вселенной</s.Description>
+              <s.Title>Pizza</s.Title>
+              <s.Description>
+                the most delicious pizza in the universe
+              </s.Description>
             </div>
           </s.LinkFlex>
         </s.Logo>

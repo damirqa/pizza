@@ -7,7 +7,7 @@ export const DEFAULT_FILTERS: IFilterState = {
   categoryId: 0,
   sort: {
     field: "rating",
-    value: "популярности (ASC)",
+    value: "popular (ASC)",
     typeSort: "asc",
   },
 };

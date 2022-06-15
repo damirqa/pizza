@@ -38,7 +38,7 @@ const CartItem: React.FC<CartPizza> = React.memo(({ pizza, position }) => {
       <s.CartItemInfo className="cart__item-info">
         <s.CartItemTitle>{pizza.title}</s.CartItemTitle>
         <s.CartItemParagraph>
-          {pizza.type}, {pizza.size} см.
+          {pizza.type}, {pizza.size} cm.
         </s.CartItemParagraph>
       </s.CartItemInfo>
       <s.CartItemCount>

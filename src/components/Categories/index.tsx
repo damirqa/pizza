@@ -7,14 +7,7 @@ import {
 } from "../../redux/slices/filterSlice";
 
 const Categories: React.FC = () => {
-  const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианская",
-    "Гриль",
-    "Острые",
-    "Закрытые",
-  ];
+  const categories = ["All", "Meat", "Vegetarian", "Grill", "Spicy", "Closed"];
 
   const categoryId = useTypedSelector(selectCategoryId);
   const dispatch = useTypedDispatch();

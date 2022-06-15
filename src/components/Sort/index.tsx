@@ -6,14 +6,14 @@ import * as s from "./styles";
 export const sortList: ISort[] = [
   {
     field: "rating",
-    value: "популярности (ASC)",
+    value: "popular (ASC)",
     typeSort: "asc",
   },
-  { field: "rating", value: "популярности (DESC)", typeSort: "desc" },
-  { field: "price", value: "цене (ASC)", typeSort: "asc" },
-  { field: "price", value: "цене (DESC)", typeSort: "desc" },
-  { field: "title", value: "алфавиту (ASC)", typeSort: "asc" },
-  { field: "title", value: "алфавиту (DESC)", typeSort: "desc" },
+  { field: "rating", value: "popular (DESC)", typeSort: "desc" },
+  { field: "price", value: "price (ASC)", typeSort: "asc" },
+  { field: "price", value: "price (DESC)", typeSort: "desc" },
+  { field: "title", value: "alphabet (ASC)", typeSort: "asc" },
+  { field: "title", value: "alphabet (DESC)", typeSort: "desc" },
 ];
 
 const Sort: React.FC = () => {
@@ -56,7 +56,7 @@ const Sort: React.FC = () => {
             fill="#2C2C2C"
           />
         </s.svg>
-        <s.Label>Сортировка по:</s.Label>
+        <s.Label>Sorting by:</s.Label>
         <s.Value onClick={() => setVisible((prevState) => !prevState)}>
           {sort.value}
         </s.Value>

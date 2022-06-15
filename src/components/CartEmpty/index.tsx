@@ -7,16 +7,16 @@ const CartEmpty: React.FC = () => {
   return (
     <s.Root>
       <s.Title>
-        Корзина пустая <span>😕</span>
+        Empty Cart <span>😕</span>
       </s.Title>
       <s.Paragraph>
-        Вероятней всего, вы не заказывали ещё пиццу.
+        Most likely, you haven't ordered pizza yet.
         <br />
-        Для того, чтобы заказать пиццу, перейди на главную страницу.
+        To order a pizza, go to the main page.
       </s.Paragraph>
       <s.EmptyCartImage src={emptyCart} alt="Empty cart" />
       <Link to={"/"}>
-        <s.ButtonBack>Вернуться назад</s.ButtonBack>
+        <s.ButtonBack>Go Back</s.ButtonBack>
       </Link>
     </s.Root>
   );
